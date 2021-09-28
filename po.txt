@@ -1,0 +1,17 @@
+#first check if there are more than N terms in the in array of pairs, terms.
+	#if there are, then add all terms in the array of pairs, terms (up to the terminating pair 0,-1)
+	#if there is not, then add just the first N terms
+		#skip any terms whose exponents are already in the polynomial
+		#use a loop to iterate through the polynomial and compare exponents
+	
+	move $t0, $s2
+	add $t0, $t0, $t0	#double N
+	addi $t0, $t0, -1	#minus 1
+	li $t1, 4
+	mult $t0, $t1
+	mflo $t0		#times by 4.
+	add $t0, $t0, $s1	#$t0 now points to the exponents value of the Nth term. If this is -1, then good
+	
+	lw $t1, -4($t0)		#coefficient value of Nth term
+	lw $t2, 0($t0)		#exponent value of Nth term
+	beqz $t1, add_N_terms_to_polynomial_
